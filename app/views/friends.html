@@ -1,0 +1,78 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	
+	<title>Friends</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/friends_style_sheet.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="col-md-12" class="active">
+			<nav class="navbar navbar-light bg-faded">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-item active">
+						<a class="nav-link.pull-*-right" href="/logout">Logout <span class="sr-only"></span></a>
+					</li>
+				</ul>
+			</nav> 
+			<h5>Hello, {{session['name']}}!</h5>
+		</div> <!-- end of class="col-md-12" -->
+
+	</div> <!-- end of class="container" -->
+
+	<div class="container">
+		<h6>Here is the list of your friends:</h6>
+		<table>
+		<col width="150">
+      	<col width="300">
+	    <thead> 
+	      <th>Alias</th>
+	      <th>Action</th>
+	    </thead>
+		<tbody>
+	    {% for friend in friends: %}
+	      <tr>
+	      	<td> {{friend['alias']}} </td> <!--{{friend['alias']}} -->
+	      	<td> <a href="#">View Profile</a>
+	      	     <form action='/remove/{{friend['id']}}' method='POST'>
+	                <input type="submit" value="Remove as Friend">
+	             </form>
+	        </td>
+	      </tr>
+
+	    {% endfor %}
+	    </tbody>
+	   </table>
+
+	  <h6>Other users not on your friend's list</h6>
+	  <table>
+	  	<col width="150">
+      	<col width="300">
+	  <thead>
+	  	<th>Alias</th>
+	  	<th>Action</th>
+	  </thead>
+	  <tbody>
+	  	{% for non_friend in non_friends: %}
+	  	<tr>
+	  		<td> <a href="#">{{non_friend['alias']}}</td>
+	  		<td> <form action="/add/{{non_friend['id']}}" method='POST'>
+	  			<input id="add_btn" type="submit" value="Add as Friend">
+	  		</form>
+	  		</td>
+	  	</tr>
+	  	{% endfor %}
+	  </tbody>
+	  </table>
+
+</body>
+</html>

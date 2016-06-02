@@ -1,0 +1,28 @@
+* {
+  font-family: monaco;
+}
+
+a, form{
+	display: inline-block;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+tr:nth-child(even) {
+    background-color: lightblue;
+}
+tr:nth-child(odd) {
+    background-color: cyan;
+}
+th{
+	background-color: #D3D3D3;
+}
+
+#add_btn{
+	margin: 5px;
+}
