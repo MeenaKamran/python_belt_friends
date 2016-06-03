@@ -47,11 +47,7 @@ class User(Model):
         errors = []
         # datetime.datetime.now()
         # Some basic validation
-        today = datetime.date.today()
-        print today
-        print "b-day is: ", info['bday']
-        # print datetime.date(info['bday']) - datetime.date.today()
-        # print "above is the difference"
+      
         if not info['name']:
             errors.append('First Name cannot be blank')
 
@@ -61,7 +57,7 @@ class User(Model):
         if not info['email']:
             errors.append('Email cannot be blank')
         elif not EMAIL_REGEX.match(info['email']):
-            print info['email']
+            # print info['email']
             errors.append('Email format must be valid!')
         if not info['password']:
             errors.append('Password cannot be blank')
@@ -75,18 +71,18 @@ class User(Model):
         #     errors.append("Birth Date cannot be today or in the future") 
         # If we hit errors, return them, else return True.
         if errors:
-            print "there are errors"
+
             return {"status": False, "errors": errors}
         else:
             pw_hash = self.bcrypt.generate_password_hash(info['password'])
             # Code to insert user goes here...
-            query_insert="INSERT INTO users (name, alias, email, password, bday) VALUES (:name, :alias, :email, :password, :bday)"
+            query_insert="INSERT INTO users (name, alias, email, password, birthday) VALUES (:name, :alias, :email, :password, :bday)"
             data={'name':info['name'],'alias':info['alias'], 'email':info['email'],'password':pw_hash, 'bday':info['bday']}
             self.db.query_db(query_insert, data)
             # Then retrieve the last inserted user.
             get_user_query = "SELECT * FROM users ORDER BY id DESC LIMIT 1"
             users = self.db.query_db(get_user_query)
-            print "there are no errors"
+
             status = { "status": True, "user": users[0] }
             return status
 
@@ -99,16 +95,22 @@ class User(Model):
         
         user = self.db.query_db(query_login, data)
         
-        print user
+        # print user
         if user == []:
-            print "no user"
+
             errors.append('Invalid login!')
             return{"status": False, "errors": errors}
         else:
             if self.bcrypt.check_password_hash(user[0]['password'], info['password']):
-                print "password matched"
+
                 return {"status": True, "user": user[0] }
             else:
-                print "password not matched"
+
                 errors.append('Invalid password!')
                 return{"status": False, "errors": errors}
+
+    def get_user_info(self, user_id):
+
+        query = "SELECT * FROM users WHERE users.id=:user_id"
+        data = {'user_id': user_id}
+        return self.db.query_db(query, data) 

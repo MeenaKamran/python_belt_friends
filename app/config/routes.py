@@ -27,6 +27,8 @@ routes['GET']['/friends'] = 'Friends#index'
 routes['POST']['/add/<friend_id>'] = 'Friends#add'
 routes['POST']['/remove/<friend_id>'] = 'Friends#remove'
 
+routes['GET']['/show_user/<user_id>'] = 'Users#show_user'
+
 """
     You can add routes and specify their handlers as follows:
 

@@ -1,0 +1,47 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>{{user['alias']}}</title>
+	<!-- <link rel="stylesheet" href="FreeBSD_css.css"> -->
+	<link rel="stylesheet" type="text/css" href="/static/css/show_user_style_sheet.css">
+	<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="col-md-12" class="active">
+			<nav class="navbar navbar-light bg-faded">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-item active">
+						<a class="nav-link.pull-*-right" href="/friends">Home <span class="sr-only"></span></a>
+					</li>
+					<li class="divider-vertical"></li>
+					<li class="nav-item active">
+						<a class="nav-link.pull-*-right" href="/logout">Logout <span class="sr-only"></span></a>
+					</li>
+				</ul>
+			</nav> 
+		</div> <!-- end of class="col-md-12" -->
+	</div> <!-- end of class="container" -->
+
+	<div class="container">
+
+		<h4>{{user['alias']}}'s Profile</h4>
+
+		<br>
+		<h6>Name: {{user['name']}}</h6>
+		<h6>Email Address: {{user['email']}}</h6>
+
+	</div>
+
+
+
+</body>
+</html>

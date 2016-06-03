@@ -57,19 +57,18 @@ class Users(Controller):
         
         # call create_user method from model and write some logic based on the returned value
         # notice how we passed the user_info to our model method
-        print "before create_status is called"
+        # print "before create_status is called"
         create_status = self.models['User'].create_user(user_info)
         #print create_status
-        print "this is create_status['status']", create_status['status']
-        # print "this is create_status['user_id']", create_status['user']['user_id']
+  
         if create_status['status'] == True:
-            print "we are in create_status = true"
+            # print "we are in create_status = true"
             # the user should have been created in the model
             # we can set the newly-created users id and name to session
             session['id'] = create_status['user']['id'] 
             session['name'] = create_status['user']['name']
             # we can redirect to the users profile page here
-            print "before calling success.html"
+            # print "before calling success.html"
             return redirect('/friends')
         else:
             # set flashed error messages here from the error messages we returned from the Model
@@ -83,14 +82,14 @@ class Users(Controller):
             "email" : request.form['form-email'],
             "password" : request.form['form-password']
         }
-        print "before calling create_status"
+        # print "before calling create_status"
         create_status = self.models['User'].login(user_info)
-        print "after calling create_status"
+        # print "after calling create_status"
         if create_status['status'] == True:
-            print "we are in create_status=True"
+            # print "we are in create_status=True"
             session['id'] = create_status['user']['id']
             session['name'] = create_status['user']['name']
-            print session['id']
+            # print session['id']
             return redirect('/friends')
         else:
             # set flashed error messages here from the error messages we returned from the Model
@@ -102,4 +101,11 @@ class Users(Controller):
         session['id'] = 0
         session['name'] = ""
         return redirect('/')
+
+    def show_user(self, user_id):
+
+        # print "this is user_id:" + user_id
+        user = self.models['User'].get_user_info(user_id)
+
+        return self.load_view('user_info.html', user=user[0])
 
